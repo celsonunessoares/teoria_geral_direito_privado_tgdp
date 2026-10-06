@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulado de Concursos - Teoria Geral do Direito Privado & LINDB</title>
-    <meta name="theme-color" content="#0f172a">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Inter -->
@@ -35,9 +34,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 24rem),
-                linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            background-color: #f8fafc;
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -57,80 +54,20 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-
-        .site-header.bg-slate-900 {
-            background: linear-gradient(110deg, #0f172a 0%, #172554 100%);
-        }
-
-        .site-header h1,
-        .site-header p {
-            max-width: min(46vw, 20rem);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .question-card,
-        .result-card {
-            box-shadow: 0 18px 48px -30px rgba(15, 23, 42, 0.42);
-        }
-
-        .question-card {
-            border-top: 3px solid #2563eb;
-        }
-
-        #container-alternativas > button {
-            min-height: 3.5rem;
-            overflow-wrap: anywhere;
-            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease;
-        }
-
-        #container-alternativas > button:not(:disabled):hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px -18px rgba(37, 99, 235, 0.8);
-        }
-
-        button:focus-visible {
-            outline: 3px solid rgba(37, 99, 235, 0.55);
-            outline-offset: 2px;
-        }
-
-        @media (max-width: 360px) {
-            .site-header h1,
-            .site-header p {
-                max-width: 34vw;
-            }
-
-            #container-alternativas > button {
-                gap: 0.65rem;
-                padding: 0.85rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
 </head>
 
 <body class="text-slate-800 min-h-screen flex flex-col justify-between antialiased">
 
     <!-- Navigation Header -->
-    <header class="site-header bg-slate-900 text-white shadow-md sticky top-0 z-30">
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-30">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center space-x-3 min-w-0">
+            <div class="flex items-center space-x-3">
                 <div class="bg-brand-600 p-2 rounded-lg text-white font-bold text-lg">
                     ⚖️
                 </div>
                 <div>
-                    <h1 class="font-bold text-sm sm:text-base md:text-lg leading-tight">Simulado para Concursos Públicos</h1>
+                    <h1 class="font-bold text-base md:text-lg leading-tight">Simulado para Concursos Públicos</h1>
                     <p class="text-xs text-slate-400">Teoria Geral do Direito Privado & LINDB (60 Questões)</p>
                 </div>
             </div>
@@ -151,32 +88,31 @@
     </header>
 
     <!-- Stats & Progress Bar Header -->
-    <section class="stats-section bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm sticky top-[68px] z-20">
+    <section class="bg-white border-b border-slate-200 shadow-sm sticky top-[61px] z-20">
         <div class="max-w-6xl mx-auto px-4 py-3">
             <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center mb-2 text-xs md:text-sm">
-                <div class="stat-card bg-slate-50 p-2 rounded-lg border border-slate-100">
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-100">
                     <span
                         class="text-slate-500 block text-[11px] uppercase tracking-wider font-semibold">Progresso</span>
                     <span id="stat-questao-numero" class="font-bold text-slate-800">1 / 60</span>
                 </div>
-                <div class="stat-card bg-emerald-50 p-2 rounded-lg border border-emerald-100">
+                <div class="bg-emerald-50 p-2 rounded-lg border border-emerald-100">
                     <span
                         class="text-emerald-600 block text-[11px] uppercase tracking-wider font-semibold">Acertos</span>
                     <span id="stat-acertos" class="font-bold text-emerald-700">0 (0%)</span>
                 </div>
-                <div class="stat-card bg-rose-50 p-2 rounded-lg border border-rose-100">
+                <div class="bg-rose-50 p-2 rounded-lg border border-rose-100">
                     <span class="text-rose-600 block text-[11px] uppercase tracking-wider font-semibold">Erros</span>
                     <span id="stat-erros" class="font-bold text-rose-700">0 (0%)</span>
                 </div>
-                <div class="stat-card bg-blue-50 p-2 rounded-lg border border-blue-100 col-span-2 md:col-span-2">
+                <div class="bg-blue-50 p-2 rounded-lg border border-blue-100 col-span-2 md:col-span-2">
                     <span class="text-blue-600 block text-[11px] uppercase tracking-wider font-semibold">Aproveitamento
                         Geral</span>
                     <span id="stat-aproveitamento" class="font-bold text-blue-800">0%</span>
                 </div>
             </div>
             <!-- Progress Bar -->
-            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden" role="progressbar"
-                aria-label="Progresso do simulado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                 <div id="barra-progresso" class="bg-brand-600 h-2 rounded-full transition-all duration-300"
                     style="width: 0%"></div>
             </div>
@@ -189,7 +125,7 @@
         <!-- Quiz Screen -->
         <div id="tela-simulado" class="block space-y-6">
             <!-- Question Card -->
-            <div class="question-card bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-8">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-8">
                 <!-- Question Badge Header -->
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
                     <div class="flex items-center gap-2">
@@ -252,7 +188,7 @@
 
         <!-- Final Result Screen (Hidden by default) -->
         <div id="tela-resultado" class="hidden space-y-6">
-            <div class="result-card bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-10 text-center">
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:p-10 text-center">
                 <div class="inline-flex p-4 rounded-full bg-blue-50 text-brand-600 mb-4 text-4xl">
                     🏆
                 </div>
@@ -1238,57 +1174,11 @@
             }
         ];
 
-        const CHAVES_ALTERNATIVAS = ['A', 'B', 'C', 'D'];
-
-        function gerarOrdemAlternativas() {
-            let posicaoCorretaAnterior = -1;
-
-            return questoes.reduce((ordens, questao) => {
-                const ordem = [...CHAVES_ALTERNATIVAS];
-
-                for (let indice = ordem.length - 1; indice > 0; indice--) {
-                    const indiceAleatorio = Math.floor(Math.random() * (indice + 1));
-                    [ordem[indice], ordem[indiceAleatorio]] = [ordem[indiceAleatorio], ordem[indice]];
-                }
-
-                let posicaoCorreta = ordem.indexOf(questao.resposta);
-                if (posicaoCorreta === posicaoCorretaAnterior) {
-                    const posicoesDisponiveis = ordem
-                        .map((_, indice) => indice)
-                        .filter(indice => indice !== posicaoCorretaAnterior);
-                    const novaPosicao = posicoesDisponiveis[Math.floor(Math.random() * posicoesDisponiveis.length)];
-                    [ordem[posicaoCorreta], ordem[novaPosicao]] = [ordem[novaPosicao], ordem[posicaoCorreta]];
-                    posicaoCorreta = novaPosicao;
-                }
-
-                ordens[questao.id] = ordem;
-                posicaoCorretaAnterior = posicaoCorreta;
-                return ordens;
-            }, {});
-        }
-
-        function validarOrdemAlternativas(ordens) {
-            return ordens && questoes.every(questao => {
-                const ordem = ordens[questao.id];
-                return Array.isArray(ordem)
-                    && ordem.length === CHAVES_ALTERNATIVAS.length
-                    && new Set(ordem).size === CHAVES_ALTERNATIVAS.length
-                    && CHAVES_ALTERNATIVAS.every(chave => ordem.includes(chave));
-            });
-        }
-
-        function obterLetraExibida(questao, chaveOriginal) {
-            const ordem = estado.ordemAlternativas[questao.id] || CHAVES_ALTERNATIVAS;
-            const indice = ordem.indexOf(chaveOriginal);
-            return CHAVES_ALTERNATIVAS[indice] || chaveOriginal;
-        }
-
         // Estado da Aplicação
         let estado = {
             questaoAtualIndex: 0,
             respostasUsuario: {}, // { indexQuestao: { selecionada: 'A'|'B'|'C'|'D', correta: boolean } }
-            opcaoSelecionadaTemp: null,
-            ordemAlternativas: gerarOrdemAlternativas()
+            opcaoSelecionadaTemp: null
         };
 
         const STORAGE_KEY = 'simulado_direito_privado_v1';
@@ -1308,15 +1198,11 @@
                     if (dados && typeof dados.questaoAtualIndex === 'number' && dados.respostasUsuario) {
                         estado.questaoAtualIndex = dados.questaoAtualIndex;
                         estado.respostasUsuario = dados.respostasUsuario;
-                        if (validarOrdemAlternativas(dados.ordemAlternativas)) {
-                            estado.ordemAlternativas = dados.ordemAlternativas;
-                        }
                     }
                 }
             } catch (e) {
                 console.error('Erro ao carregar dados do localStorage:', e);
             }
-            salvarProgresso();
         }
 
         // Salvar estado atual no localStorage
@@ -1324,8 +1210,7 @@
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify({
                     questaoAtualIndex: estado.questaoAtualIndex,
-                    respostasUsuario: estado.respostasUsuario,
-                    ordemAlternativas: estado.ordemAlternativas
+                    respostasUsuario: estado.respostasUsuario
                 }));
             } catch (e) {
                 console.error('Erro ao salvar progresso no localStorage:', e);
@@ -1353,10 +1238,9 @@
             document.getElementById('stat-questao-numero').textContent =
                 `${estado.questaoAtualIndex + 1} / ${totalQuestoes}`;
             document.getElementById('stat-acertos').textContent = `${acertos} (${pctAcertos}%)`;
-            document.getElementById('stat-erros').textContent = `${erros} (${pctErros}%)`;
+            document.getElementById('stat-erros').textContent = `${erros} (${pctErros})%`;
             document.getElementById('stat-aproveitamento').textContent = `${pctAcertos}%`;
             document.getElementById('barra-progresso').style.width = `${pctProgresso}%`;
-            document.getElementById('barra-progresso').parentElement.setAttribute('aria-valuenow', pctProgresso);
 
             // Verificar se o simulado foi concluído por completo (60 respondidas)
             if (respondidas === totalQuestoes && estado.questaoAtualIndex >= totalQuestoes - 1 && estado
@@ -1397,16 +1281,11 @@
             btnProxima.classList.add('hidden');
             caixaFeedback.classList.add('hidden');
 
-            // Exibir cada alternativa sob uma letra aleatória, preservando sua chave original.
-            const ordemAlternativas = estado.ordemAlternativas[q.id] || CHAVES_ALTERNATIVAS;
-            CHAVES_ALTERNATIVAS.forEach((letra, indice) => {
-                const chaveOriginal = ordemAlternativas[indice];
-                const textoOpcao = q.alternativas[chaveOriginal];
+            // Renderizar opções A, B, C, D
+            ['A', 'B', 'C', 'D'].forEach(letra => {
+                const textoOpcao = q.alternativas[letra];
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.setAttribute('aria-label', `Alternativa ${letra}: ${textoOpcao}`);
-                btn.setAttribute('aria-pressed', 'false');
-                btn.dataset.chaveOriginal = chaveOriginal;
                 btn.className =
                     `w-full text-left p-4 rounded-xl border-2 transition duration-150 flex items-start gap-3.5 text-sm md:text-base cursor-pointer focus:outline-none`;
 
@@ -1417,11 +1296,11 @@
                     btn.disabled = true;
                     btn.classList.remove('cursor-pointer');
 
-                    if (chaveOriginal === q.resposta) {
+                    if (letra === q.resposta) {
                         // Alternativa Correta Destaque
                         visualClass = "border-emerald-500 bg-emerald-50/70 text-emerald-900 font-medium";
                         badgeClass = "bg-emerald-600 text-white font-bold";
-                    } else if (jaRespondida.selecionada === chaveOriginal && !jaRespondida.correta) {
+                    } else if (jaRespondida.selecionada === letra && !jaRespondida.correta) {
                         // Alternativa Errada Selecionada pelo Usuário
                         visualClass = "border-rose-500 bg-rose-50/70 text-rose-900 font-medium";
                         badgeClass = "bg-rose-600 text-white font-bold";
@@ -1470,7 +1349,6 @@
             Array.from(container.children).forEach(child => {
                 child.classList.remove('border-brand-600', 'bg-brand-50/60', 'ring-2', 'ring-brand-500');
                 child.classList.add('border-slate-200', 'bg-white');
-                child.setAttribute('aria-pressed', child.dataset.chaveOriginal === letra ? 'true' : 'false');
             });
 
             // Aplicar destaque no selecionado
@@ -1531,7 +1409,7 @@
                 caixa.classList.add('bg-rose-50', 'border-rose-200', 'text-rose-900');
                 titulo.className = "font-bold text-base md:text-lg mb-2 text-rose-800 flex items-center gap-2";
                 titulo.innerHTML =
-                    `<span>✕</span> <span>INCORRETA! A alternativa correta era a letra ${obterLetraExibida(q, q.resposta)}.</span>`;
+                    `<span>✕</span> <span>INCORRETA! A alternativa correta era a letra ${q.resposta}.</span>`;
             }
 
             explicacao.innerHTML = `
@@ -1663,8 +1541,8 @@
                 </div>
                 <p class="text-xs md:text-sm text-slate-800 font-medium leading-relaxed">${q.pergunta}</p>
                 <div class="text-xs space-y-1 bg-white p-3 rounded-lg border border-slate-200">
-                    <p><strong class="text-slate-700">Sua Escolha:</strong> ${resp ? `${obterLetraExibida(q, resp.selecionada)}) ${q.alternativas[resp.selecionada]}` : 'Nenhuma'}</p>
-                    <p><strong class="text-emerald-700">Gabarito Correto:</strong> ${obterLetraExibida(q, q.resposta)}) ${q.alternativas[q.resposta]}</p>
+                    <p><strong class="text-slate-700">Sua Escolha:</strong> ${resp ? `${resp.selecionada}) ${q.alternativas[resp.selecionada]}` : 'Nenhuma'}</p>
+                    <p><strong class="text-emerald-700">Gabarito Correto:</strong> ${q.resposta}) ${q.alternativas[q.resposta]}</p>
                 </div>
                 <div class="text-xs text-slate-600 bg-blue-50/60 p-3 rounded-lg border border-blue-100">
                     <strong>Explicativo:</strong> ${q.explicacao}
@@ -1699,11 +1577,9 @@
             estado = {
                 questaoAtualIndex: 0,
                 respostasUsuario: {},
-                opcaoSelecionadaTemp: null,
-                ordemAlternativas: gerarOrdemAlternativas()
+                opcaoSelecionadaTemp: null
             };
 
-            salvarProgresso();
             atualizarInterface();
             window.scrollTo({
                 top: 0,
